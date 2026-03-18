@@ -12,6 +12,13 @@
 .swiftpm/
 migrate_working_dir/
 
+# Environment variables
+.env*
+
+# Firebase sensitive files
+google-services.json
+GoogleService-Info.plist
+
 # IntelliJ related
 *.iml
 *.ipr
