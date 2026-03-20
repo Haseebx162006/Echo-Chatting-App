@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:echo/firebase_options.dart';
 import 'package:echo/views/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,7 +7,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    if (e.toString().contains('duplicate-app')) {
+      debugPrint('Firebase already initialized');
+    } else {
+      rethrow;
+    }
+  }
   runApp(const MyApp());
 }
 

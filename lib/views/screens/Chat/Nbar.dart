@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:echo/views/screens/Chat/ChatScreen.dart';
+import 'package:echo/views/screens/Chat/Settings.dart';
 import 'package:flutter/material.dart';
 
 class Nbar extends StatefulWidget {
@@ -16,7 +17,7 @@ class _NbarState extends State<Nbar> {
     const ChatScreen(),
     const HomeTab(),
     const ProfileTab(),
-    const SettingsTab(),
+    const Settings(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -89,22 +90,6 @@ class ProfileTab extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: Center(child: Text('Profile Screen')),
-    );
-  }
-}
-
-class SettingsTab extends StatelessWidget {
-  const SettingsTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        backgroundColor: Color(0xff546A2F),
-        foregroundColor: Colors.white,
-      ),
-      body: Center(child: Text('Settings Screen')),
     );
   }
 }

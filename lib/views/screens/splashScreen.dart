@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:echo/main.dart';
 import 'package:echo/views/screens/auth/signUpPage.dart';
 import 'package:flutter/material.dart';
 
