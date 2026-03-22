@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:echo/util/AuthWrapper.dart';
 import 'package:echo/views/screens/auth/signUpPage.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class _splashScreenState extends State<splashScreen> {
           timer.cancel();
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => signUP()),
+            MaterialPageRoute(builder: (context) => AuthWrapper()),
           );
         }
       });

@@ -1,6 +1,8 @@
+import 'package:echo/controllers/AuthController.dart';
 import 'package:echo/util/authContainer.dart';
 import 'package:echo/util/authbutton.dart';
 import 'package:echo/views/screens/Chat/Nbar.dart';
+import 'package:echo/views/screens/auth/signUpPage.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final Authcontroller _authcontroller = Authcontroller();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,9 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
               AuthButton(
                 text: "Sign In",
                 onpressed: () {
-                  Navigator.push(
+                  _authcontroller.signIn(
                     context,
-                    MaterialPageRoute(builder: (context) => Nbar()),
+                    emailController.text.trim(),
+                    passwordController.text.trim(),
                   );
                 },
               ),
@@ -129,7 +141,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => signUP()),
+                      );
                     },
                     child: Text(
                       "Sign Up",

@@ -41,7 +41,7 @@ class _SettingsState extends State<Settings> {
             children: [
               const CircleAvatar(
                 radius: 60,
-                backgroundImage: AssetImage("assets/images/profile.png"),
+                backgroundImage: AssetImage("assets/images/Userprof.jpg"),
               ),
               Container(
                 height: 18,

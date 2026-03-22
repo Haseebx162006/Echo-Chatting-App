@@ -1,6 +1,7 @@
+import 'package:echo/controllers/AuthController.dart';
 import 'package:echo/util/authContainer.dart';
 import 'package:echo/util/authbutton.dart';
-import 'package:echo/views/screens/auth/LoginScreen.dart';
+
 import 'package:flutter/material.dart';
 
 class signUP extends StatefulWidget {
@@ -14,6 +15,15 @@ class _signUPState extends State<signUP> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final Authcontroller _authcontroller = Authcontroller();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +134,9 @@ class _signUPState extends State<signUP> {
                 controller: passwordController,
               ),
               SizedBox(height: 40),
-              AuthButton(text: "Sign Up", onpressed: () {}),
+              AuthButton(text: "Sign Up", onpressed: () {
+                _authcontroller.signUp(context, nameController.text.trim(), emailController.text.trim(), passwordController.text.trim());
+              }),
               SizedBox(height: 35),
 
               Row(
@@ -141,10 +153,7 @@ class _signUPState extends State<signUP> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
+                      _authcontroller.signUp(context, nameController.text.trim(), emailController.text.trim(), passwordController.text.trim());
                     },
                     child: Text(
                       "Sign In",
