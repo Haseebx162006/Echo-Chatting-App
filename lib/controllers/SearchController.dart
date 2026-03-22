@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Searchcontroller {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Stream<List<UserModel>> SearchUser(String query) async {
-    return await _firestore
+  Stream<List<UserModel>> SearchUser(String query) {
+    return _firestore
         .collection('users')
         .where('displayName', isGreaterThanOrEqualTo: query)
         .where('displayName', isLessThan: query + '\uf8ff')
