@@ -1,6 +1,7 @@
 import 'package:echo/Providers/Userprovider.dart';
 import 'package:echo/util/Chattile.dart';
 import 'package:echo/util/StatusCard.dart';
+import 'package:echo/views/screens/Chat/InnerChatScreen.dart';
 import 'package:echo/views/screens/auth/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -151,6 +152,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             name: user.name,
                             lastMessage: "No msg to show",
                             time: DateTime.now().toString().substring(11, 16),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      InnerChatScreen(user: user),
+                                ),
+                              );
+                            },
                           );
                         },
                       );

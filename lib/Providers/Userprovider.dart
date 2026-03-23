@@ -1,7 +1,7 @@
 import 'package:echo/controllers/UserController.dart';
+import 'package:echo/controllers/ChatController.dart';
 import 'package:echo/models/UserModel.dart';
 
-import 'package:riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
 
 final searchProvider = StateProvider<String>((ref) {
@@ -10,6 +10,10 @@ final searchProvider = StateProvider<String>((ref) {
 
 final userController = Provider((ref) {
   return Usercontroller();
+});
+
+final chatControllerProvider = Provider((ref) {
+  return ChatController();
 });
 
 final userProvider = StreamProvider<List<UserModel>>((ref) {

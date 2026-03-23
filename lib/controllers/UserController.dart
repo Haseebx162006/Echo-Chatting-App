@@ -17,8 +17,8 @@ class Usercontroller {
   Stream<List<UserModel>> SearchUser(String query) {
     return _firestore
         .collection('users')
-        .where('displayName', isGreaterThanOrEqualTo: query)
-        .where('displayName', isLessThan: query + '\uf8ff')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .where('name', isLessThan: query + '\uf8ff')
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
