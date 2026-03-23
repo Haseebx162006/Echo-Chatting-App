@@ -19,6 +19,6 @@ class UserModel {
     required this.LastSeen,
   });
   factory UserModel.fromMap(Map<String,dynamic> map){
-    return UserModel(uid: map['uid'] ?? " ", name: map['name'] ?? " " , email: map['email'] ?? " ", profilePictureUrl: map['profilePictureUrl'] ?? " ", isOnline: map['isOnline'] ?? false, Statusmsg: map['Statusmsg'] ?? " ", CreatedAt: map['CreatedAt'] ?? DateTime.now(), LastSeen: map['LastSeen'] ?? DateTime.now());
+    return UserModel(uid: map['uid'] ?? "", name: map['name'] ?? "" , email: map['email'] ?? "", profilePictureUrl: map['profilePictureUrl'] ?? "", isOnline: map['isOnline'] ?? false, Statusmsg: map['Statusmsg'] ?? "", CreatedAt: map['CreatedAt'] ?? DateTime.now(), LastSeen: map['LastSeen'] ?? DateTime.now());
   }
 }

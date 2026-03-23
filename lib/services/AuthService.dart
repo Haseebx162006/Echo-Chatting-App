@@ -22,6 +22,10 @@ class AuthService {
     }
   }
 
+  Future<void> LogOut() async {
+    return await _auth.signOut();
+  }
+
   Future<String?> signUp(String name, String email, String password) async {
     try {
       final userCredential = await _auth.createUserWithEmailAndPassword(

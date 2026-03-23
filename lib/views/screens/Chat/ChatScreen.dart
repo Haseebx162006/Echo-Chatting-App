@@ -1,16 +1,18 @@
+import 'package:echo/Providers/Userprovider.dart';
 import 'package:echo/util/Chattile.dart';
 import 'package:echo/util/StatusCard.dart';
 import 'package:echo/views/screens/auth/LoginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  ConsumerState<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends ConsumerState<ChatScreen> {
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -114,6 +116,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   EdgeInsets.symmetric(horizontal: 10),
                 ),
                 controller: searchController,
+                onChanged: (value) {
+                  ref.read(searchProvider.notifier).state = value;
+                },
                 backgroundColor: MaterialStateProperty.all(Color(0xffD5E0C2)),
                 hintText: "Search for contactcs",
               ),
@@ -129,19 +134,31 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
               SizedBox(height: 20),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  var chat = list[index];
-                  return Chattile(
-                    name: chat["name"]!,
-                    lastMessage: chat["lastMessage"]!,
-                    time: chat["time"]!,
-                  );
-                },
-              ),
+              ref
+                  .watch(userProvider)
+                  .when(
+                    data: (users) {
+                      if (users.isEmpty) {
+                        return Center(child: Text("NO users"));
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          final user = users[index];
+                          return Chattile(
+                            name: user.name,
+                            lastMessage: "No msg to show",
+                            time: DateTime.now().toString().substring(11, 16),
+                          );
+                        },
+                      );
+                    },
+                    error: (error, stackTrace) =>
+                        Center(child: Text("Error: $error")),
+                    loading: () => Center(child: CircularProgressIndicator()),
+                  ),
             ],
           ),
         ),

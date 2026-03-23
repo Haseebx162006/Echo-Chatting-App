@@ -1,3 +1,4 @@
+import 'package:echo/controllers/AuthController.dart';
 import 'package:echo/util/Settingtile.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
+    final authcontroller = Authcontroller();
     return Scaffold(
       backgroundColor: const Color(0xffF5F5F5),
       //  App Bar
@@ -83,7 +85,9 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
-              onPressed: () {},
+              onPressed: () {
+                authcontroller.LogOut(context);
+              },
               child: const Text("Edit Profile"),
             ),
           ),

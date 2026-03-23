@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 class Authcontroller {
   final AuthService _authService = AuthService();
 
+  Future<void> LogOut(BuildContext context) async {
+    try {
+      await _authService.LogOut();
+      final snackBar = SnackBar(content: Text("Logged Out Successfully"));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
   Future<void> signIn(
     BuildContext context,
     String email,
